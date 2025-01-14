@@ -5,6 +5,11 @@ class Articolo(models.Model):
     contenuto = models.TextField()
     autore = models.CharField(max_length=100)
     data_pubblicazione = models.DateTimeField(auto_now_add=True)
+
+     #serve a ordinare gli articoli nel database in base alla data di pubblicazione
+    class Meta:
+        ordering = ['-data_pubblicazione']
+        
     #aggiungo queste due righe che servono a visualizzare su databasd il titolo direttamente
     def __str__(self):
         return self.titolo
