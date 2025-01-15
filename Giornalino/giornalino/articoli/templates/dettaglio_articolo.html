@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ articolo.titolo }}</title>
+</head>
+<body>
+    <h1>{{ articolo.titolo }}</h1>
+    <p>Autore: {{ articolo.autore }}</p>
+    <p>Pubblicato il: {{ articolo.data_pubblicazione|date:"d M Y" }}</p>
+    <div>
+        {{ articolo.contenuto }}
+    </div>
+    <a href="/">Torna alla lista</a>
+</body>
+</html>

@@ -2,6 +2,7 @@ from django.db import models
 
 class Articolo(models.Model):
     titolo = models.CharField(max_length=200)
+    id = models.AutoField(primary_key=True)
     contenuto = models.TextField()
     autore = models.CharField(max_length=100)
     data_pubblicazione = models.DateTimeField(auto_now_add=True)

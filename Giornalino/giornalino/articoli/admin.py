@@ -4,7 +4,7 @@ from .models import Articolo
 #sistemazione aggiuntiva del database
 class ArticoloAdmin(admin.ModelAdmin):
     #lista di attributi dell'articolo
-    list_display = ('titolo', 'autore', 'data_pubblicazione')
+    list_display = ('titolo', 'autore', 'data_pubblicazione', 'id')
 
     #campi di ricerca
     search_fields = ('titolo', 'autore')
