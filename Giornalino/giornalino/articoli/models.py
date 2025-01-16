@@ -9,10 +9,23 @@ class Articolo(models.Model):
 
     #serve a ordinare gli articoli nel database in base alla data di pubblicazione
     class Meta:
+        verbose_name = "Articolo"
+        verbose_name_plural = "Articoli"
         ordering = ['-data_pubblicazione']
         
     #aggiungo queste due righe che servono a visualizzare sul database il titolo dell'articolo
     def __str__(self):
         return self.titolo
 
+# aggiungo qui un modello per la newsletter molto basic
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    is_active = models.BooleanField(default=True)  # Per gestire chi vuole annullare l'iscrizione
+    date_subscribed = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "Iscritto"
+        verbose_name_plural = "Iscritti"
+
+    def __str__(self):
+        return self.email
