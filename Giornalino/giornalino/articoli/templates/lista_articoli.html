@@ -22,7 +22,7 @@ Articoli
             <li>
                 <a href= '{% url 'dettaglio_articolo' articolo.id %}' target='blanck_'><h2>{{ articolo.titolo }}</h2></a>
                 <p>{{ articolo.contenuto }}</p>
-                <small>Scritto da {{ articolo.autore }} il {{ articolo.data_pubblicazione|date:"d/m/Y" }}</small>
+                <small>Scritto da {{ articolo.autore }} il {{ articolo.data_pubblicazione|date:"d/m/Y" }} alle {{ articolo.ora_pubblicazione }}</small>
             </li>
         {% endfor %}
     </ul>
