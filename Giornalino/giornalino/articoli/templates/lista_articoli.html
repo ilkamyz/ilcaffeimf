@@ -3,7 +3,20 @@
 Articoli
 {% endblock %}
 {% block content %}
-    <h1>Articoli</h1>
+   <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h1>Articoli</h1>
+        <form>
+            <fieldset>
+                <legend>Ordina per: </legend>
+                <select name="ordinamento">
+                    <option selected="selected">Più recenti</option>
+                    <option>Meno recenti</option>
+                    <option>I più piaciuti</option>
+                </select>
+            </fieldset>
+        </form>
+   </div>
+
     <ul>
         {% for articolo in articoli %}
             <li>
