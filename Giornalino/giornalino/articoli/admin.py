@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Articolo, NewsletterSubscriber
+from .models import Articolo, NewsletterSubscriber, AcoountSubscriber
 
 #sistemazione aggiuntiva del database
 class ArticoloAdmin(admin.ModelAdmin):
@@ -13,6 +13,12 @@ class ArticoloAdmin(admin.ModelAdmin):
 
     #ordinazione predefinita per data di pubblicazione
     ordering = ('data_pubblicazione',)
+
+class AccountSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'password', 'data_iscrizione')
+
+    ordering = ('data_iscrizione',)
     
 admin.site.register(Articolo, ArticoloAdmin)
 admin.site.register(NewsletterSubscriber)
+admin.site.register(AcoountSubscriber, AccountSubscriberAdmin)

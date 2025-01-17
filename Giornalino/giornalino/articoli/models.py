@@ -29,3 +29,16 @@ class NewsletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
+    
+# modello che gestisce gli account del sito nel database
+class AcoountSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=80)
+    is_active = models.BooleanField(default=True)
+    data_iscrizione = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Account"
+
+    def __str__(self):
+        return self.email
