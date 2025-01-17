@@ -5,16 +5,24 @@ Articoli
 {% block content %}
    <div style="display: flex; align-items: center; justify-content: space-between;">
         <h1>Articoli</h1>
-        <form>
-            <fieldset>
-                <legend>Ordina per: </legend>
-                <select name="ordinamento">
-                    <option selected="selected">Più recenti</option>
-                    <option>Meno recenti</option>
-                    <option>I più piaciuti</option>
-                </select>
-            </fieldset>
-        </form>
+        <form method="POST">
+        {% csrf_token %} <!-- protezione per il form -->
+        <fieldset>
+            <legend>Ordina per:</legend>
+            <select name="ordinamento" onchange="this.form.submit()">
+                {% if request.POST.ordinamento == 'recenti' or not request.POST.ordinamento %}
+                <option value="recenti" selected="selected">Più recenti</option>
+                <option value="meno_recenti">Meno recenti</option>
+
+                {% else %}
+                <option value="recenti">Più recenti</option>
+                <option value="meno_recenti" selected="selected">Meno recenti</option>
+
+                {% endif %}
+
+            </select>
+        </fieldset>
+    </form>
    </div>
 
     <ul>
