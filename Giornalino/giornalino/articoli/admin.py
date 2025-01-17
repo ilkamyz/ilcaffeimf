@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Articolo, NewsletterSubscriber, AcoountSubscriber
+from .forms import AccountSubscriberChangeForm
+from .models import Articolo, NewsletterSubscriber, AccountSubscriber
 
 #sistemazione aggiuntiva del database
 class ArticoloAdmin(admin.ModelAdmin):
@@ -15,10 +16,14 @@ class ArticoloAdmin(admin.ModelAdmin):
     ordering = ('data_pubblicazione',)
 
 class AccountSubscriberAdmin(admin.ModelAdmin):
-    list_display = ('email', 'password', 'data_iscrizione')
+    list_display = ('email', 'data_iscrizione')
+    form = AccountSubscriberChangeForm  # Usa il form personalizzato
+    readonly_fields = ('data_iscrizione',)
 
     ordering = ('data_iscrizione',)
+
+  
     
 admin.site.register(Articolo, ArticoloAdmin)
 admin.site.register(NewsletterSubscriber)
-admin.site.register(AcoountSubscriber, AccountSubscriberAdmin)
+admin.site.register(AccountSubscriber, AccountSubscriberAdmin)
