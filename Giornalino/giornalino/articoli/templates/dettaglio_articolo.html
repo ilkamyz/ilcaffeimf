@@ -11,6 +11,42 @@
     <div>
         {{ articolo.contenuto }}
     </div>
+    
+    <!-- Sezione per il pulsante Mi Piace -->
+    <div>
+        <button id="btn-mi-piace" data-articolo-id="{{ articolo.id }}">
+            ❤️ Mi piace ({{ articolo.totale_mi_piace }})
+        </button>
+    </div>
+
+    <!-- Link per tornare alla lista degli articoli -->
     <a href="/">Torna alla lista</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnMiPiace = document.getElementById('btn-mi-piace');
+
+            btnMiPiace.addEventListener('click', function () {
+                const articoloId = this.dataset.articoloId;
+
+                // Invia la richiesta al server per aggiungere o rimuovere il Mi Piace
+                fetch(`/mi-piace/${articoloId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}', // Token CSRF per protezione
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.stato) {
+                        // Aggiorna il conteggio dei Mi Piace
+                        this.textContent = `❤️ Mi piace (${data.totale})`;
+                    }
+                })
+                .catch(error => console.error('Errore:', error));
+            });
+        });
+    </script>
 </body>
 </html>

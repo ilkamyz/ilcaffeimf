@@ -1,11 +1,11 @@
 from django.contrib import admin
 from .forms import AccountSubscriberChangeForm
-from .models import Articolo, NewsletterSubscriber, AccountSubscriber
+from .models import Articolo, NewsletterSubscriber, AccountSubscriber, MiPiace
 
 #sistemazione aggiuntiva del database
 class ArticoloAdmin(admin.ModelAdmin):
     #lista di attributi dell'articolo
-    list_display = ('titolo', 'autore', 'data_pubblicazione', 'id')
+    list_display = ('titolo', 'totale_mi_piace', 'autore', 'data_pubblicazione', 'id')
 
     #campi di ricerca
     search_fields = ('titolo', 'autore')
