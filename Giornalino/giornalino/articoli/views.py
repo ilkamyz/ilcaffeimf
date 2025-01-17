@@ -5,8 +5,21 @@ from .forms import NewsletterSubscriptionForm
 from .models import Articolo, NewsletterSubscriber, MiPiace
 
 def lista_articoli(request):
-    articoli = Articolo.objects.all().order_by('-data_pubblicazione')
-    return render(request, 'lista_articoli.html', {'articoli': articoli})
+    # Recupera il valore selezionato dall'utente
+    ordinamento = request.POST.get(
+        "ordinamento", "recenti"
+    )  # Valore di default: 'recenti'
+    articoli = Articolo.objects.all().order_by("-data_pubblicazione")
+
+    if ordinamento == "recenti":
+        print(ordinamento)
+        articoli.order_by("-data_pubblicazione")
+    elif ordinamento == "meno_recenti":
+        print(ordinamento)
+        articoli.order_by("data_pubblicazione")
+
+    return render(request, "lista_articoli.html", {"articolo": articoli})
+
 
 def dettaglio_articolo(request, pk):
     articolo = get_object_or_404(Articolo, pk=pk)
