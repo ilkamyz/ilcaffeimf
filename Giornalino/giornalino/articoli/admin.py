@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .forms import AccountSubscriberChangeForm
-from .models import Articolo, AccountSubscriber, MiPiace
+from .models import Articolo, MiPiace
 
 #sistemazione aggiuntiva del database
 class ArticoloAdmin(admin.ModelAdmin):
@@ -15,14 +14,4 @@ class ArticoloAdmin(admin.ModelAdmin):
     #ordinazione predefinita per data di pubblicazione
     ordering = ('data_pubblicazione',)
 
-class AccountSubscriberAdmin(admin.ModelAdmin):
-    list_display = ('email', 'data_iscrizione')
-    form = AccountSubscriberChangeForm  # Usa il form personalizzato
-    readonly_fields = ('data_iscrizione',)
-
-    ordering = ('data_iscrizione',)
-
-  
-    
 admin.site.register(Articolo, ArticoloAdmin)
-admin.site.register(AccountSubscriber, AccountSubscriberAdmin)
