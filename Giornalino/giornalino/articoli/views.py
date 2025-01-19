@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import JsonResponse
-from .forms import NewsletterSubscriptionForm
-from .models import Articolo, NewsletterSubscriber, MiPiace
+from .models import Articolo, MiPiace
 
 
 def lista_articoli(request):
@@ -25,27 +24,6 @@ def lista_articoli(request):
 def dettaglio_articolo(request, pk):
     articolo = get_object_or_404(Articolo, pk=pk)
     return render(request, "dettaglio_articolo.html", {"articolo": articolo})
-
-
-# view del form di iscrizione
-def iscrizione_newsletter(request):
-    if request.method == "POST":
-        form = NewsletterSubscriptionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request,
-                "Iscrizione completata! Grazie per esserti iscritto alla nostra newsletter.",
-            )
-            return redirect("")
-        else:
-            messages.error(
-                request, "C'è stato un problema con l'iscrizione. Per favore riprova."
-            )
-    else:
-        form = NewsletterSubscriptionForm()
-
-    return render(request, "iscrizione_newsletter.html", {"form": form})
 
 
 def toggle_mi_piace(request, pk):

@@ -1,12 +1,8 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
-from .models import NewsletterSubscriber, AccountSubscriber
+from .models import  AccountSubscriber
 
-#file creato apposta per il form di iscrizione alla newsletter
-class NewsletterSubscriptionForm(forms.ModelForm):
-    class Meta:
-        model = NewsletterSubscriber
-        fields = ['email']
+
 
 #file per il form degli account
 class AccountSubscriberChangeForm(forms.ModelForm):

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .forms import AccountSubscriberChangeForm
-from .models import Articolo, NewsletterSubscriber, AccountSubscriber, MiPiace
+from .models import Articolo, AccountSubscriber, MiPiace
 
 #sistemazione aggiuntiva del database
 class ArticoloAdmin(admin.ModelAdmin):
@@ -25,5 +25,4 @@ class AccountSubscriberAdmin(admin.ModelAdmin):
   
     
 admin.site.register(Articolo, ArticoloAdmin)
-admin.site.register(NewsletterSubscriber)
 admin.site.register(AccountSubscriber, AccountSubscriberAdmin)
