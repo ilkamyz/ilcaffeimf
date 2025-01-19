@@ -9,7 +9,7 @@
     <p>Autore: {{ articolo.autore }}</p>
     <p>Pubblicato il: {{ articolo.data_pubblicazione|date:"d/m/Y" }}</p>
     <div>
-        {{ articolo.contenuto }}
+        {{ articolo.contenuto|safe }}
     </div>
     
     <!-- Sezione per il pulsante Mi Piace -->
