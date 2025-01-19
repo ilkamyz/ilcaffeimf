@@ -64,6 +64,11 @@
         .indietro:hover {
             color: black
         }
+
+        
+        .mi-piace-attivo {
+            color: red;
+        }
     </style>
 
 </head>
@@ -80,7 +85,7 @@
         <p><small class="info">{{ articolo.data_pubblicazione|date:"d/m/Y" }} • {{ articolo.contenuto|conta }}
             </small></p>
         <div>
-            {{ articolo.contenuto }}
+            {{ articolo.contenuto |safe}}
         </div>
 
         <!-- Sezione per il pulsante Mi Piace -->
@@ -99,28 +104,38 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const btnMiPiace = document.getElementById('btn-mi-piace');
-
+        
+            if (!btnMiPiace) {
+                console.error('Pulsante non trovato!');
+                return;
+            }
+        
             btnMiPiace.addEventListener('click', function () {
                 const articoloId = this.dataset.articoloId;
-
-                // Invia la richiesta al server per aggiungere o rimuovere il Mi Piace
+        
                 fetch(`/mi-piace/${articoloId}/`, {
                     method: 'POST',
                     headers: {
-                        'X-CSRFToken': '{{ csrf_token }}', // Token CSRF per protezione
+                        'X-CSRFToken': '{{ csrf_token }}',
                         'Content-Type': 'application/json',
                     }
                 })
                     .then(response => response.json())
                     .then(data => {
                         if (data.stato) {
-                            // Aggiorna il conteggio dei Mi Piace
-                            this.textContent = `<i class="fal fa-heart"></i> ${data.totale} Mi piace `;
+                            this.innerHTML = `<i class="far fa-heart"></i> ${data.totale} Mi piace`;
+        
+                            if (data.like_attivo) {
+                                this.classList.add('mi-piace-attivo');
+                            } else {
+                                this.classList.remove('mi-piace-attivo');
+                            }
                         }
                     })
                     .catch(error => console.error('Errore:', error));
             });
         });
+        
     </script>
 </body>
 
