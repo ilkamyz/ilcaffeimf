@@ -1,26 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ articolo.titolo }}</title>
-</head>
-<body>
-    <h1>{{ articolo.titolo }}</h1>
-    <p>Autore: {{ articolo.autore }}</p>
-    <p>Pubblicato il: {{ articolo.data_pubblicazione|date:"d/m/Y" }}</p>
-    <div>
-        {{ articolo.contenuto|safe }}
-    </div>
-    
-    <!-- Sezione per il pulsante Mi Piace -->
-    <div>
-        <button id="btn-mi-piace" data-articolo-id="{{ articolo.id }}">
-            ❤️ Mi piace ({{ articolo.totale_mi_piace }})
-        </button>
-    </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        #btn-mi-piace {
+            color: grey;
+            border: 0px;
+            background-color: transparent;
+        }
 
-    <!-- Link per tornare alla lista degli articoli -->
-    <a href="/">Torna alla lista</a>
+        #btn-mi-piace:hover {
+            color: red;
+
+        }
+
+        .card {
+            width: 90%;
+            padding: 10px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card h1 {
+            text-align: center;
+            margin: 0;
+            font-size: 90px;
+            color: #333;
+        }
+
+        .autore {
+            font-weight: bold;
+        }
+
+        .info {
+            color: grey;
+            margin: 50px auto;
+            padding: 10px;
+        }
+
+        #btn-mi-piace {
+            padding-top: 10px;
+            padding-left: 0px;
+            margin-left: 0px;
+        }
+
+        .navbar {}
+
+        .indietro {
+            color: gray;
+            font-size: 20px;
+            padding-left: 15px;
+            padding-bottom: 0px;
+            text-decoration: none;
+
+        }
+
+        .indietro:hover {
+            color: black
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/" class="indietro"><i class="fa-solid fa-arrow-left"></i> Indietro</a>
+
+    </div>
+    <div class="card">
+        <h1>{{ articolo.titolo }}</h1>
+        <p class="autore">{{ articolo.autore }}</p>
+        {% load custom_filters %}
+        <p><small class="info">{{ articolo.data_pubblicazione|date:"d/m/Y" }} • {{ articolo.contenuto|conta }}
+            </small></p>
+        <div>
+            {{ articolo.contenuto }}
+        </div>
+
+        <!-- Sezione per il pulsante Mi Piace -->
+        <div>
+            <p>
+                <button id="btn-mi-piace" data-articolo-id="{{ articolo.id }}">
+                    <i class="far fa-heart"></i> {{ articolo.totale_mi_piace }}
+                    Mi piace
+                </button>
+            </p>
+        </div>
+
+        <!-- Link per tornare alla lista degli articoli -->
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -37,16 +111,17 @@
                         'Content-Type': 'application/json',
                     }
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.stato) {
-                        // Aggiorna il conteggio dei Mi Piace
-                        this.textContent = `❤️ Mi piace (${data.totale})`;
-                    }
-                })
-                .catch(error => console.error('Errore:', error));
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.stato) {
+                            // Aggiorna il conteggio dei Mi Piace
+                            this.textContent = `<i class="fal fa-heart"></i> ${data.totale} Mi piace `;
+                        }
+                    })
+                    .catch(error => console.error('Errore:', error));
             });
         });
     </script>
 </body>
+
 </html>
