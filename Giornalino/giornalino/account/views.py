@@ -33,19 +33,4 @@ def register(request):
     return render(request, 'Registrati.html')
 
 def login(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-
-        if password != AccountSubscriber.password:
-            messages.error(request, 'Password errata.')
-            return render(request, 'accedi.html')
-
-        if AccountSubscriber.objects.filter(email!=email).exists():
-            messages.error(request, 'Email errata.')
-            return render(request, 'accedi.html')
-
-        messages.success(request, 'Bentornato!')
-        return redirect('') 
-
     return render(request, 'accedi.html')

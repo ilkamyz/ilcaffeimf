@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrazione Account</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@
             font-weight: bold;
             color: #555;
         }
-        input[type="text"], input[type="email"], input[type="password"] {
+        input[type="email"], input[type="password"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -50,15 +50,17 @@
         input[type="submit"]:hover {
             background: #0056b3;
         }
-        .newsletter {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
         }
-        .newsletter label {
-            margin-left: 10px;
-            font-weight: normal;
-            color: #555;
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
         }
         .error {
             color: red;
@@ -73,43 +75,13 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            {% block nomesito %}
-            Il Caffè
-            {% endblock %}
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="newsletter">Newsletter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="registrati">Registrati</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
     <div class="container">
         <h2>Accedi</h2>
         <!-- Mostra messaggi di errore o successo (da backend) -->
         <div class="error" id="error-message" style="display: none;"></div>
         <div class="success" id="success-message" style="display: none;"></div>
 
-        <form id="login-form" action="/register/" method="POST">
+        <form id="login-form" action="/login/" method="POST">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
 
@@ -118,15 +90,17 @@
 
             <input type="submit" value="Accedi">
         </form>
-    
+
+        <!-- Link alla pagina di registrazione -->
         <div class="register-link">
-            Non hai un account? <a href="/registrati/">Iscriviti ora!</a>.
+            Non hai un account? <a href="/registrati/">Registrati qui</a>.
         </div>
     </div>
 
     <script>
         // Validazione lato client
-        document.getElementById('registration-form').addEventListener('submit', function(event) {
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
@@ -135,16 +109,16 @@
             errorMessage.style.display = 'none';
             successMessage.style.display = 'none';
 
-            // Controllo che le password coincidano
-            if (password !== account.password || email !== account.email) {
+            // Controlla che i campi non siano vuoti
+            if (!email || !password) {
                 event.preventDefault();
                 errorMessage.style.display = 'block';
-                errorMessage.textContent = 'Password o email errate. Riprova';
+                errorMessage.textContent = 'Inserisci email e password.';
                 return false;
             }
 
             successMessage.style.display = 'block';
-            successMessage.textContent = 'Bentornato...';
+            successMessage.textContent = 'Accesso in corso...';
         });
     </script>
 </body>
