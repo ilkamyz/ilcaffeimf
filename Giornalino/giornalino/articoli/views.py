@@ -42,3 +42,7 @@ def toggle_mi_piace(request, pk):
         return JsonResponse({"stato": stato, "totale": articolo.totale_mi_piace()})
 
     return JsonResponse({"errore": "Metodo non supportato"}, status=405)
+
+def autore_dettaglio(request, author_name):
+    articoli = Articolo.objects.filter(autore = author_name)
+    return render(request, 'autore_dettaglio.html', {'author_name': author_name, 'articoli': articoli})
