@@ -248,7 +248,11 @@
         {% endfor %}
         <div class="container">
             {% for articolo in articoli %}
-            {% if forloop.counter <= 4 %} {% if forloop.counter==1 %} {% empty %} {% endif %} <div class="box">
+            {% if forloop.counter <= 4 %}
+                {% if forloop.counter == 1 %} 
+                    {% empty %} 
+                {% endif %} 
+                <div class="box">
 
                 <a href="{% url 'dettaglio_articolo' articolo.id %}">
                     <h1>{{ articolo.titolo }}</h1>
