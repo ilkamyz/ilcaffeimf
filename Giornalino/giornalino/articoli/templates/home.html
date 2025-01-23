@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar sopra la Navbar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <style>
+        .navbar {
+            border-bottom: 1px gray solid;
+            box-shadow: 0 2px gray;
+            text-align: center;
+            justify-content: center;
+            font-size: 25px;
+            position: relative;
+            /* Necessario per il z-index */
+            z-index: 1;
+            /* Navbar sotto la sidebar */
+        }
+
+        .bar {
+            position: absolute;
+            left: 0;
+            padding: 10px;
+        }
+
+        .menu {
+            border: 0;
+            background-color: transparent;
+        }
+
+        .sidebar {
+            width: 30vw;
+            height: 100vh;
+            border-top-right-radius: 5px;
+            background-color: white;
+            position: fixed;
+            /* Sidebar fissa sulla pagina */
+            top: 0;
+            left: 0;
+            z-index: 2;
+            /* Sidebar sopra la navbar */
+            display: none;
+            padding: 10px;
+            transform: translateX(0);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Sovrapposizione scura */
+            display: none;
+            z-index: 1;
+            /* Overlay sotto la sidebar */
+        }
+
+        #elemento {
+            padding: 20px;
+        }
+
+        .x {
+            right: 10px;
+            top: 10px;
+            position: fixed;
+            z-index: 3;
+            background-color: transparent;
+            border: none;
+            color: black;
+            font-size: 20px;
+            cursor: pointer;
+
+        }
+
+        .utilities {
+            border: 0px;
+            display: grid;
+            background-color: transparent;
+            color: rgb(47, 45, 45);
+
+        }
+
+        .card {
+            width: 90%;
+            padding: 10px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Effetto hover */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Centrare il testo */
+        .card h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            /* Layout Flexbox */
+            flex-wrap: wrap;
+            /* Permette di andare a capo */
+            gap: 10px;
+            /* Spazio tra i div */
+            padding: 10px;
+        }
+
+        /* Stile dei div */
+        .box {
+            flex: 1 1 calc(33.33% - 10px);
+            /* Ogni div occupa il 33.33% meno il gap */
+            max-width: calc(33.33% - 10px);
+            /* Imposta una larghezza massima */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            text-decoration: none;
+        }
+
+        .box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 5px grey;
+            text-decoration: none;
+
+
+        }
+
+        .box h1 {
+            text-align: center;
+            margin: 0;
+            font-size: 4vw;
+            color: #333;
+            font-weight: bold;
+
+
+        }
+
+
+        .info,
+        small {
+            color: grey;
+            margin: 10px auto;
+        }
+
+
+        /* Comportamento responsive */
+        @media (max-width: 900px) {
+            .box {
+                flex: 1 1 calc(50% - 10px);
+                /* Su schermi medi, massimo 2 div per riga */
+                max-width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                flex: 1 1 100%;
+                /* Su schermi piccoli, 1 div per riga */
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function toggleContenuto() {
+            const contenuto = document.getElementById("contenitore");
+            const overlay = document.getElementById("overlay");
+
+            if (contenuto.style.display === "none") {
+                contenuto.style.display = "block";  // Mostra la sidebar
+                overlay.style.display = "block";    // Mostra la sovrapposizione scura
+            } else {
+                contenuto.style.display = "none";  // Nasconde la sidebar
+                overlay.style.display = "none";    // Nasconde la sovrapposizione
+            }
+        }
+    </script>
+
+    <div class="navbar">
+        <div class="bar">
+            <button class="menu" onclick="toggleContenuto()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+
+    <div id="contenitore" class="sidebar">
+        <h1 style="padding: 10px; font-weight: bold; text-align: center;">IL CAFFE </h1>
+        <button class="x" onclick=" toggleContenuto()"><i class="fa-solid fa-xmark close-btn"></i></button>
+        <button class="utilities">
+            <p>Articoli</p>
+        </button>
+        <button class="utilities">
+            <p>About</p>
+        </button>
+        <button class="utilities">
+            <p>Contact</p>
+        </button>
+        <button class="utilities">
+            <p>Newsletter</p>
+        </button>
+        <button class="utilities">
+            <p>Login</p>
+        </button>
+
+
+    </div>
+
+    <div id="overlay" class="overlay"></div> <!-- Sovrapposizione scura -->
+
+    <div id="elemento">
+        <h1 style="text-align: center; font-weight: bold; font-size: 50px;">IL CAFFE</h1>
+        <small>
+            <p style="text-align: center; color: gray;">giorno</p>
+        </small>
+
+        {% for articolo in articoli %}
+        {% if forloop.counter == 1 %}
+        <div class="card">
+            <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                <h1>{{ articolo.titolo }}</h1>
+                <p class="info">{{ articolo.descrizione_breve |safe}}</p>
+                <small><i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp; <i
+                        class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}</small>
+            </a>
+        </div>
+        {% endif %}
+
+        {% endfor %}
+        <div class="container">
+            {% for articolo in articoli %}
+            {% if forloop.counter <= 4 %} {% if forloop.counter==1 %} {% empty %} {% endif %} <div class="box">
+
+                <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                    <h1>{{ articolo.titolo }}</h1>
+                    <p class="info">{{ articolo.descrizione_breve |safe}}</p>
+                    <small><i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp; <i
+                            class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}</small>
+                </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>
