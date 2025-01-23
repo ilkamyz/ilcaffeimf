@@ -229,7 +229,8 @@
     <div id="elemento">
         <h1 style="text-align: center; font-weight: bold; font-size: 50px;">IL CAFFE</h1>
         <small>
-            <p style="text-align: center; color: gray;">giorno</p>
+            {% load custom_filters %}
+            <p style="text-align: center; color: gray;">{{ ""|giorno }}</p>
         </small>
         <div class="container">
             {% for articolo in articoli %}
