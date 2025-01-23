@@ -46,3 +46,7 @@ def toggle_mi_piace(request, pk):
 def autore_dettaglio(request, author_name):
     articoli = Articolo.objects.filter(autore = author_name)
     return render(request, 'autore_dettaglio.html', {'author_name': author_name, 'articoli': articoli})
+
+def home(request):
+    articoli = Articolo.objects.all()
+    return render(request, "home.html", {"articoli": articoli})
