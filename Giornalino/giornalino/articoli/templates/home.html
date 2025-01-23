@@ -87,9 +87,8 @@
         }
 
         .card {
-            width: 90%;
+            width: 100vw;
             padding: 10px;
-            margin: 50px auto;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -232,39 +231,39 @@
         <small>
             <p style="text-align: center; color: gray;">giorno</p>
         </small>
-
-        {% for articolo in articoli %}
-        {% if forloop.counter == 1 %}
-        <div class="card">
-            <a href="{% url 'dettaglio_articolo' articolo.id %}">
-                <h1>{{ articolo.titolo }}</h1>
-                <p class="info">{{ articolo.descrizione_breve |safe}}</p>
-                <small><i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp; <i
-                        class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}</small>
-            </a>
-        </div>
-        {% endif %}
-
-        {% endfor %}
         <div class="container">
             {% for articolo in articoli %}
-            {% if forloop.counter <= 4 %}
-                {% if forloop.counter == 1 %} 
-                    {% empty %} 
-                {% endif %} 
-                <div class="box">
-
+            {% if forloop.counter == 1 %}
+            <div class="card">
                 <a href="{% url 'dettaglio_articolo' articolo.id %}">
                     <h1>{{ articolo.titolo }}</h1>
                     <p class="info">{{ articolo.descrizione_breve |safe}}</p>
-                    <small><i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp; <i
-                            class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}</small>
+                    <small>
+                        <i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <i class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}
+                    </small>
                 </a>
-        </div>
-        {% endif %}
-        {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
 
+            <div class="container">
+                {% for articolo in articoli %}
+                {% if forloop.counter > 1 and forloop.counter <= 4 %} <div class="box">
+                    <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                        <h1>{{ articolo.titolo }}</h1>
+                        <p class="info">{{ articolo.descrizione_breve |safe}}</p>
+                        <small>
+                            <i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}
+                        </small>
+                    </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
     </div>
+
 </body>
 
 </html>
