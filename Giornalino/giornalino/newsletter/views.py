@@ -9,12 +9,16 @@ def iscrizione_newsletter(request):
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Iscrizione completata con successo!")
-            return redirect('#')  # Modifica '#' con la tua vista principale
+            try:
+                form.save()
+                messages.success(request, "Iscrizione completata con successo!")
+            except IntegrityError:
+                messages.error(request, "Questa email è già registrata.")
+            return redirect('lista_articoli')  # Modifica '#' con la tua vista principale
     else:
         form = NewsletterForm()
     return render(request, 'iscrizione.html', {'form': form})
+
 
 
 def invia_newsletter(request):

@@ -170,7 +170,7 @@
             <p>Scopri in anteprima le nostre novità, offerte esclusive e articoli interessanti.</p>
             <form method="POST">
                 {% csrf_token %}
-                <input type="email" placeholder="Inserisci la tua email">
+                <input type="email" name="email" placeholder="Inserisci la tua email"  oninvalid="this.setCustomValidity('Inserisci un indirizzo email valido!')" oninput="this.setCustomValidity('')" required>
                 <button type="submit">Iscriviti ora</button>
             </form>
 
