@@ -237,7 +237,7 @@
             {% if forloop.counter == 1 %}
             <div class="card">
                 <a href="{% url 'dettaglio_articolo' articolo.id %}">
-                    <h1>{{ articolo.titolo }}</h1>
+                    <h1>{{ articolo.titolo |safe}}</h1>
                     <p class="info">{{ articolo.descrizione_breve |safe}}</p>
                     <small>
                         <i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp;

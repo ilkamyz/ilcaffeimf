@@ -79,7 +79,7 @@
 
     </div>
     <div class="card">
-        <h1>{{ articolo.titolo }}</h1>
+        <h1>{{ articolo.titolo |safe}}</h1>
         <p class="autore">{{ articolo.autore }}</p>
         {% load custom_filters %}
         <p><small class="info">{{ articolo.data_pubblicazione|date:"d/m/Y" }} • {{ articolo.contenuto|conta }}
