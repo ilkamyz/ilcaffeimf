@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar sopra la Navbar</title>
+    <title>IL CAFFE</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <style>
@@ -95,7 +95,8 @@
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
-        /* Effetto hover */
+        
+        
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -176,6 +177,19 @@
                 max-width: 100%;
             }
         }
+
+        .rubrica {
+            display: flex;
+            /* mette le scritte sulla stessa linea */
+            justify-content: center;
+            /* Centra le scritte orizzontalmente */
+            margin: 0 auto;
+            gap: 20px;
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+            width: 40vw;
+            padding-top: 10px;
+        }
     </style>
 </head>
 
@@ -232,12 +246,23 @@
             {% load custom_filters %}
             <p style="text-align: center; color: gray;">{{ ""|giorno }}</p>
         </small>
+
+        <p>
+        <div class="rubrica">
+            <p style="color: blue;">Tecnologia </p>
+            <p>•</p>
+            <p style="color: red;">Marketing</p>
+        </div>
+        </p>
+
+
+
         <div class="container">
             {% for articolo in articoli %}
             {% if forloop.counter == 1 %}
             <div class="card">
                 <a href="{% url 'dettaglio_articolo' articolo.id %}">
-                    <h1>{{ articolo.titolo |safe}}</h1>
+                    <h1>{{ articolo.titolo }}</h1>
                     <p class="info">{{ articolo.descrizione_breve |safe}}</p>
                     <small>
                         <i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp;
