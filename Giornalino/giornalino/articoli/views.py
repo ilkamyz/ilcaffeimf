@@ -12,10 +12,9 @@ def lista_articoli(request):
     articoli = Articolo.objects.all().order_by("-data_pubblicazione")
 
     if ordinamento == "recenti":
-        print(ordinamento)
         articoli = articoli.order_by("-data_pubblicazione")
+
     elif ordinamento == "meno_recenti":
-        print(ordinamento)
         articoli = articoli.order_by("data_pubblicazione")
 
     return render(request, "lista_articoli.html", {"articoli": articoli})
@@ -43,9 +42,15 @@ def toggle_mi_piace(request, pk):
 
     return JsonResponse({"errore": "Metodo non supportato"}, status=405)
 
+
 def autore_dettaglio(request, author_name):
-    articoli = Articolo.objects.filter(autore = author_name)
-    return render(request, 'autore_dettaglio.html', {'author_name': author_name, 'articoli': articoli})
+    articoli = Articolo.objects.filter(autore=author_name)
+    return render(
+        request,
+        "autore_dettaglio.html",
+        {"author_name": author_name, "articoli": articoli},
+    )
+
 
 def home(request):
     articoli = Articolo.objects.all()

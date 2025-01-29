@@ -50,7 +50,6 @@
             margin-left: 0px;
         }
 
-        .navbar {}
 
         .indietro {
             color: gray;
@@ -65,7 +64,7 @@
             color: black
         }
 
-        
+
         .mi-piace-attivo {
             color: red;
         }
@@ -75,7 +74,7 @@
 
 <body>
     <div class="navbar">
-        <a href="/" class="indietro"><i class="fa-solid fa-arrow-left"></i> Indietro</a>
+        <a href="/articoli" class="indietro"><i class="fa-solid fa-arrow-left"></i> Indietro</a>
 
     </div>
     <div class="card">
@@ -104,15 +103,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const btnMiPiace = document.getElementById('btn-mi-piace');
-        
+
             if (!btnMiPiace) {
                 console.error('Pulsante non trovato!');
                 return;
             }
-        
+
             btnMiPiace.addEventListener('click', function () {
                 const articoloId = this.dataset.articoloId;
-        
+
                 fetch(`/mi-piace/${articoloId}/`, {
                     method: 'POST',
                     headers: {
@@ -124,7 +123,7 @@
                     .then(data => {
                         if (data.stato) {
                             this.innerHTML = `<i class="far fa-heart"></i> ${data.totale} Mi piace`;
-        
+
                             if (data.like_attivo) {
                                 this.classList.add('mi-piace-attivo');
                             } else {
@@ -135,7 +134,7 @@
                     .catch(error => console.error('Errore:', error));
             });
         });
-        
+
     </script>
 </body>
 

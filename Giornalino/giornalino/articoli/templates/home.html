@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <style>
+        body {
+            background-color: aliceblue;
+        }
+
         .navbar {
             border-bottom: 1px gray solid;
             box-shadow: 0 2px gray;
@@ -95,8 +99,8 @@
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
-        
-        
+
+
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -219,21 +223,21 @@
     <div id="contenitore" class="sidebar">
         <h1 style="padding: 10px; font-weight: bold; text-align: center;">IL CAFFE </h1>
         <button class="x" onclick=" toggleContenuto()"><i class="fa-solid fa-xmark close-btn"></i></button>
-        <button class="utilities">
+        <a class="utilities" href="{% url 'lista_articoli' %}"">
             <p>Articoli</p>
-        </button>
-        <button class="utilities">
+        </a>
+        <button class=" utilities">
             <p>About</p>
-        </button>
-        <button class="utilities">
-            <p>Contact</p>
-        </button>
-        <button class="utilities">
-            <p>Newsletter</p>
-        </button>
-        <button class="utilities">
-            <p>Login</p>
-        </button>
+            </button>
+            <button class="utilities">
+                <p>Contact</p>
+            </button>
+            <button class="utilities">
+                <p>Newsletter</p>
+            </button>
+            <button class="utilities">
+                <p>Login</p>
+            </button>
 
 
     </div>
@@ -260,7 +264,8 @@
         <div class="container">
             {% for articolo in articoli %}
             {% if forloop.counter == 1 %}
-            <div class="card">
+            <div class="card"
+                style="background-image: url('{{ articolo.immagine.url }}'); background-size: cover; background-position: center; background-repeat: no-repeat; display: flex;">
                 <a href="{% url 'dettaglio_articolo' articolo.id %}">
                     <h1>{{ articolo.titolo }}</h1>
                     <p class="info">{{ articolo.descrizione_breve |safe}}</p>
