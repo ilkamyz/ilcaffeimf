@@ -2,9 +2,11 @@
 <html lang="it">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>{{ articolo.titolo }}</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/ckeditor_custom.css' %}">
     <style>
         #btn-mi-piace {
             color: grey;
@@ -30,7 +32,7 @@
         .card h1 {
             text-align: center;
             margin: 0;
-            font-size: 90px;
+            font-size: 5vw;
             color: #333;
         }
 
@@ -40,8 +42,6 @@
 
         .info {
             color: grey;
-            margin: 50px auto;
-            padding: 10px;
         }
 
         #btn-mi-piace {
@@ -75,15 +75,17 @@
 <body>
     <div class="navbar">
         <a href="/articoli" class="indietro"><i class="fa-solid fa-arrow-left"></i> Indietro</a>
-
     </div>
+
     <div class="card">
         <h1>{{ articolo.titolo |safe}}</h1>
-        <p class="autore">{{ articolo.autore }}</p>
-        {% load custom_filters %}
-        <p><small class="info">{{ articolo.data_pubblicazione|date:"d/m/Y" }} • {{ articolo.contenuto|conta }}
-            </small></p>
-        <div>
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+            <p class="autore">{{ articolo.autore }}</p>
+            {% load custom_filters %}
+            <p><small class="info">{{ articolo.data_pubblicazione|date:"d/m/Y" }} • {{ articolo.contenuto|conta }}
+                </small></p>
+        </div>
+        <div style="padding: 10px;">
             {{ articolo.contenuto |safe}}
         </div>
 

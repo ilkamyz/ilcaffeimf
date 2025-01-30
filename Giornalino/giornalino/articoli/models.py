@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Articolo(models.Model):
     titolo = models.CharField(max_length=200)
     id = models.AutoField(primary_key=True)
-    contenuto = RichTextField()
-    descrizione_breve = RichTextField()
+    contenuto = RichTextUploadingField()
+    descrizione_breve = RichTextUploadingField()
     autore = models.CharField(max_length=100)
     data_pubblicazione = models.DateTimeField(auto_now_add=True)
     immagine = models.ImageField(upload_to="articoli/", blank=True, null=True)

@@ -121,9 +121,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
-STATICFILES_DIR = [os.path.join(BASE_DIR, "static")]
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
+
 
 MEDIA_URL = "media/"
 
@@ -132,10 +137,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     "default": {
-        "toolbar": "Full",  # Puoi scegliere una toolbar diversa
-        "filebrowserUploadUrl": "/ckeditor/upload/",  # URL per il caricamento dei file
-        "filebrowserImageUploadUrl": "/ckeditor/upload/",  # URL per il caricamento delle immagini
-    },
+        "toolbar": "full",
+        "height": 300,
+        "width": "100%",
+        "extraPlugins": ",".join(
+            [
+                "uploadimage",  # Plugin che permette il caricamento immagini
+            ]
+        ),
+        "filebrowserUploadUrl": "/ckeditor/upload/",  # URL per gestire gli upload
+        "filebrowserUploadMethod": "form",
+        "contentsCss": ["/static/css/ckeditor_custom.css"],
+    }
 }
 
 # Default primary key field type
