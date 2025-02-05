@@ -116,12 +116,13 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <h1 style="margin-left: 63px;">Articoli</h1>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px;">
+        <h1>Articoli</h1>
         <form method="POST">
             {% csrf_token %} <!-- protezione per il form -->
             <fieldset>
-                <select name="ordinamento" onchange="this.form.submit()">
+                <select name="ordinamento" onchange="this.form.submit()" style="border-radius: 6px; padding-left: 7px; padding: 5px; background-color: transparent;  font-family:''
+                    Times New Roman', Times, serif;">
                     {% if request.POST.ordinamento == 'recenti' or not request.POST.ordinamento %}
                     <option value="recenti" selected="selected">Più recenti</option>
                     <option value="meno_recenti">Meno recenti</option>
@@ -152,6 +153,7 @@
         {% endfor %}
 
     </div>
+
 </body>
 
 </html>

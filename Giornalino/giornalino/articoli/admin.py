@@ -29,6 +29,9 @@ class ArticoloAdmin(admin.ModelAdmin):
     list_display = ("titolo", "totale_mi_piace", "autore", "data_pubblicazione", "id")
     readonly_fields = ("data_pubblicazione",)
 
+    class Media:
+        js = ("https://cdn.ckeditor.com/ckeditor4/ckeditor.js",)
+
     # campi di ricerca
 
 
