@@ -24,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-pfx-fqssn#iir0l2#6nq7v1uyrmren9(nhkbbc4l+dws)ld2yc"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['lucarrino.pythonanywhere.com']
 
 # Application definition
 
@@ -122,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 if DEBUG:
     STATICFILES_DIRS = [
@@ -134,6 +133,7 @@ MEDIA_URL = "media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     "default": {
