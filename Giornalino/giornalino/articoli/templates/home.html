@@ -189,12 +189,26 @@
         }
 
 
-        .info,
-        small {
+        .info, small {
+            color: grey;
+            margin: 10px auto;
+
+        }
+
+        .uf{
+            color: grey;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+
+
+        small{
             color: grey;
             margin: 10px auto;
         }
-
 
         /* Comportamento responsive */
         @media (max-width: 900px) {
@@ -344,17 +358,18 @@
 
                     {% endif %}
                     <img src='{{ articolo.immagine.url }}'
-                        style=" object-fit: cover; padding: 0px; border-radius: 7px; width: 100%; height: 90%;"> <a
-                        href="{% url 'dettaglio_articolo' articolo.id %}">
+                        style=" object-fit: cover; padding: 0px; border-radius: 7px; width: 100%; height: 90%;">
                         <h1
                             style="color: rgb(68, 54, 54); text-align: center; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
                             {{ articolo.titolo |safe }}</h1>
                         <p class="info">{{ articolo.descrizione_breve |safe}}</p>
-                        <small>
-                            <i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp;
-                            <i class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}
-                        </small>
-                    </a>
+                        <div  class="uf">
+                            <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }} </i>
+                            <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
+                        </div>
+
+                        <a href="{% url 'dettaglio_articolo' articolo.id %}" style="color: white; font-size: 2.5vw; align-items: center; background-color: rgb(144, 67, 222); border-radius: 5px; height: 10vh; text-decoration: none; text-align: center;"> Leggi di più <i class="fa-solid fa-arrow-right"></i></a>
+
                 </div>
                 {% endif %}
                 {% endfor %}
