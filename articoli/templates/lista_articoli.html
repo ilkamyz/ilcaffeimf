@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articoli</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        rel="stylesheet" />
+
+    <style>
+        .navbar1 {
+            border-bottom: 1px gray solid;
+            box-shadow: 0 2px gray;
+            text-align: center;
+            justify-content: center;
+            font-size: 25px;
+            position: relative;
+            /* Necessario per il z-index */
+            z-index: 1;
+            /* Navbar sotto la sidebar */
+            max-height: 13vh;
+
+        }
+
+
+        .navbar1 img {
+            max-height: 10vh;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+
+        }
+
+        .bar1 {
+            position: absolute;
+            left: 0;
+            padding-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            /* Layout Flexbox */
+            flex-wrap: wrap;
+            /* Permette di andare a capo */
+            gap: 20px;
+            /* Spazio tra i div */
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Stile dei div */
+        .box {
+            flex: 1 1 calc(50% - 10px);
+            /* Ogni div occupa il 33.33% meno il gap */
+            max-width: calc(50% - 10px);
+            /* Imposta una larghezza massima */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            text-decoration: none;
+            height: 100%;
+
+        }
+
+        .box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 5px grey;
+            text-decoration: none;
+
+
+        }
+
+        .box h1 {
+            text-align: center;
+            margin: 0;
+            color: #333;
+            font-weight: bold;
+
+
+        }
+
+
+        .info,
+        small {
+            color: grey;
+            margin: 10px auto;
+            position: bottom;
+        }
+
+
+        @media (max-width: 600px) {
+            .box {
+                flex: 1 1 100%;
+                /* Su schermi piccoli, 1 div per riga */
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class=" navbar1">
+        <div class="bar1"></div>
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; padding: 10px; position: relative;">
+            <h1 style="font-weight: bold; text-align: center;"><img src="{% static 'caffe.jpg' %}">IL CAFFE</h1>
+            <div style="display: flex; margin: 0 0; font-size: 1.7vw; justify-content: center; align-items: center;">
+                <form method="POST">
+                    {% csrf_token %} <!-- protezione per il form -->
+                    <fieldset>
+                        <select name="ordinamento" onchange="this.form.submit()" style="border-radius: 6px; padding-left: 7px; padding: 5px; background-color: transparent;  font-family:''
+                        Times New Roman', Times, serif;">
+                            {% if request.POST.ordinamento == 'recenti' or not request.POST.ordinamento %}
+                            <option value="recenti" selected="selected"><i class="fa-solid fa-sort"></i>Più recenti
+                            </option>
+                            <option value="meno_recenti"><i class="fa-solid fa-sort"></i>Meno recenti</option>
+                            {% else %}
+                            <option value="recenti"><i class="fa-solid fa-sort"></i>Più recenti</option>
+                            <option value="meno_recenti" selected="selected"><i class="fa-solid fa-sort"></i>Meno
+                                recenti</option>
+
+
+                            {% endif %}
+
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for articolo in articoli %}
+
+        <div class="box">
+            <img src='{{ articolo.immagine.url }}'
+                style=" object-fit: cover; padding: 0px; border-radius: 7px; width: 100%; height: 90%; max-height: 400px;">
+            <h1
+                style="color: rgb(68, 54, 54); text-align: center; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                {{ articolo.titolo |safe }}</h1>
+            <p class="info">{{ articolo.descrizione_breve |safe}}</p>
+            <div class="uf">
+                <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }} </i>
+                <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;
+                    {{ articolo.data_pubblicazione|date:"d/m/Y" }}
+                </i>
+            </div>
+
+            <a href="{% url 'dettaglio_articolo' articolo.id %}"
+                style="display: flex; justify-content: center; margin: 0 auto; width: 60%;  color: white; align-items: center; background-color: rgb(144, 67, 222); border-radius: 5px; height: 10vh; text-align: center;">
+                Leggi di più <i class="fa-solid fa-arrow-right"></i></a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
