@@ -26,7 +26,10 @@ SECRET_KEY = "django-insecure-pfx-fqssn#iir0l2#6nq7v1uyrmren9(nhkbbc4l+dws)ld2yc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['lucarrino.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    'lucarrino.pythonanywhere.com', 
+    'IlCaffe.pythonanywhere.com',
+]
 
 # Application definition
 
