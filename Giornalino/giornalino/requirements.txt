@@ -1,0 +1,39 @@
+# Core Django
+Django>=4.2,<5.0
+
+# CKEditor (Editor di testo avanzato)
+django-ckeditor>=6.7.0
+
+
+
+# Database (scegli uno)
+psycopg2>=2.9.9  # PostgreSQL
+mysqlclient>=2.2.0  # MySQL
+
+
+# API e Autenticazione (se usi un'API)
+djangorestframework>=3.14.0  # API REST con Django
+djangorestframework-simplejwt>=5.3.1  # Autenticazione con JWT
+
+# Gestione ambienti
+python-dotenv>=1.0.0  # Per variabili d'ambiente
+
+# Sicurezza e Debug
+django-cors-headers>=4.3.1  # Abilitare richieste da frontend separati
+django-debug-toolbar>=4.2.0  # Debugging avanzato
+
+# Storage per file statici e media
+Pillow>=10.2.0  # Manipolazione immagini (necessario per CKEditor)
+django-storages>=1.14.2  # Storage su AWS S3, Google Cloud, ecc.
+whitenoise>=6.6.0  # Gestione file statici in produzione
+
+# Caching e Performance
+redis>=5.0.1  # Cache
+django-redis>=5.4.0  # Integrazione Redis con Django
+
+# Task in background (se servono)
+celery>=5.3.6  # Per task asincroni
+
+# Deployment
+gunicorn>=21.2.0  # Per servire Django in produzione
+django-heroku>=0.3.1  # Per deploy su Heroku (opzionale)

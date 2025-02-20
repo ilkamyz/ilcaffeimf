@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-pfx-fqssn#iir0l2#6nq7v1uyrmren9(nhkbbc4l+dws)ld2yc
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'lucarrino.pythonanywhere.com', 
+    'lucarrino.pythonanywhere.com',
     'IlCaffe.pythonanywhere.com',
 ]
 

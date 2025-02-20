@@ -17,12 +17,20 @@ def lista_articoli(request):
     elif ordinamento == "meno_recenti":
         articoli = articoli.order_by("data_pubblicazione")
 
+    request.session["previous_page"] = request.path
+
     return render(request, "lista_articoli.html", {"articoli": articoli})
 
 
 def dettaglio_articolo(request, pk):
     articolo = get_object_or_404(Articolo, pk=pk)
-    return render(request, "dettaglio_articolo.html", {"articolo": articolo})
+    previous_page = request.session.get("previous_page", "/articoli/")
+
+    return render(
+        request,
+        "dettaglio_articolo.html",
+        {"articolo": articolo, "previous_page": previous_page},
+    )
 
 
 def toggle_mi_piace(request, pk):
@@ -54,4 +62,5 @@ def autore_dettaglio(request, author_name):
 
 def home(request):
     articoli = Articolo.objects.all()
+    request.session["previous_page"] = request.path
     return render(request, "home.html", {"articoli": articoli})

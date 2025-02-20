@@ -9,66 +9,28 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: aliceblue;
-        }
-
-        .navbar {
-            border-bottom: 1px gray solid;
-            box-shadow: 0 2px gray;
-            text-align: center;
-            justify-content: center;
-            font-size: 25px;
-            position: relative;
-            /* Necessario per il z-index */
-            z-index: 1;
-            /* Navbar sotto la sidebar */
-            display: none;
-        }
-
-        .bar {
-            position: absolute;
-            left: 0;
-            padding: 10px;
-        }
-
-        .menu {
-            border: 0;
-            background-color: transparent;
-        }
-
-        .sidebar {
-            width: 30vw;
-            height: 100vh;
-            border-top-right-radius: 5px;
             background-color: white;
-            position: fixed;
-            /* Sidebar fissa sulla pagina */
-            top: 0;
-            left: 0;
-            z-index: 2;
-            /* Sidebar sopra la navbar */
-            display: none;
-            padding: 10px;
-            transform: translateX(0);
-            transition: transform 0.5s ease-in-out;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
+        /* Navbar */
         .navbar1 {
             border-bottom: 1px gray solid;
             box-shadow: 0 2px gray;
             text-align: center;
             justify-content: center;
-            font-size: 25px;
+            font-size: 20px;
+            /* ridotto da 25px */
             position: relative;
-            /* Necessario per il z-index */
             z-index: 1;
-            /* Navbar sotto la sidebar */
             max-height: 13vh;
-
+            padding: 10px;
         }
 
         .navbar1 img {
-            max-height: 10vh;
+            max-height: 8vh;
+            /* ridotto da 10vh */
             max-width: 100%;
             height: auto;
             object-fit: contain;
@@ -81,273 +43,184 @@
             padding: 10px;
         }
 
-
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Sovrapposizione scura */
-            display: none;
-            z-index: 1;
-            /* Overlay sotto la sidebar */
-        }
-
-        #elemento {
-            padding: 20px;
-        }
-
-        .x {
-            right: 10px;
-            top: 10px;
-            position: fixed;
-            z-index: 3;
-            background-color: transparent;
-            border: none;
-            color: black;
-            font-size: 20px;
-            cursor: pointer;
-
-        }
-
-        .utilities {
-            border: 0px;
-            display: grid;
-            background-color: transparent;
-            color: rgb(47, 45, 45);
-
-        }
-
+        /* Card (primo articolo) */
         .card {
-            width: 100vw;
+            width: 100%;
             padding: 10px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            margin-bottom: 20px;
+            overflow-y: scroll;
+            overflow-x: scroll;
         }
 
-
-
         .card:hover {
-            transform: translateY(-10px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Centrare il testo */
-        .card h3 {
-            margin: 0;
-            font-size: 1.5rem;
+        .card h1 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            /* ridotto */
             color: #333;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
         }
 
+        .card img {
+            object-fit: cover;
+            padding: 0;
+            border-radius: 7px;
+            width: 100%;
+            height: 90%;
+            max-height: 250px;
+            /* ridotto da 400px */
+        }
+
+        .info,
+        small {
+            color: grey;
+            margin: 10px auto;
+            font-size: 0.9em;
+        }
+
+        .uf {
+            color: grey;
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+            /* meno spazio */
+            font-size: 0.7rem;
+            /* ridotto */
+        }
+
+        /* Container per la griglia degli articoli */
         .container {
             display: flex;
-            /* Layout Flexbox */
             flex-wrap: wrap;
-            /* Permette di andare a capo */
             gap: 10px;
-            /* Spazio tra i div */
             padding: 10px;
+            box-sizing: border-box;
+            justify-content: center;
         }
 
-        /* Stile dei div */
+        /* Box (altri articoli) */
         .box {
             flex: 1 1 calc(33.33% - 10px);
-            /* Ogni div occupa il 33.33% meno il gap */
             max-width: calc(33.33% - 10px);
-            /* Imposta una larghezza massima */
+            min-width: calc(33.33% - 10px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             text-decoration: none;
+            height: 100%;
+            background-color: white;
+            overflow-y: scroll;
+            overflow-x: scroll;
         }
 
         .box:hover {
             transform: translateY(-2px);
             box-shadow: 0px 5px 5px grey;
-            text-decoration: none;
-
-
         }
 
         .box h1 {
-            text-align: center;
-            margin: 0;
-            font-size: 4vw;
+            margin: 10px 0;
+            font-size: 1em;
+            /* ridotto */
             color: #333;
             font-weight: bold;
-
-
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
         }
 
-
-        .info, small {
-            color: grey;
-            margin: 10px auto;
-
+        .box img {
+            object-fit: cover;
+            padding: 0;
+            border-radius: 7px;
+            width: 100%;
+            height: 90%;
+            max-height: 250px;
+            /* ridotto */
         }
 
-        .uf{
-            color: grey;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            font-size: 0.8rem;
-        }
-
-
-        small{
-            color: grey;
-            margin: 10px auto;
-        }
-
-        /* Comportamento responsive */
+        /* Responsive */
         @media (max-width: 900px) {
             .box {
                 flex: 1 1 calc(50% - 10px);
-                /* Su schermi medi, massimo 2 div per riga */
                 max-width: calc(50% - 10px);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .navbar {
-                display: block;
-            }
-
-            .navbar1 {
-                display: none;
             }
         }
 
         @media (max-width: 600px) {
             .box {
                 flex: 1 1 100%;
-                /* Su schermi piccoli, 1 div per riga */
                 max-width: 100%;
             }
         }
 
-        .rubrica {
+        .barb {
             display: flex;
-            /* mette le scritte sulla stessa linea */
-            justify-content: center;
-            /* Centra le scritte orizzontalmente */
-            margin: 0 auto;
-            gap: 20px;
-            border-top: 1px solid gray;
-            border-bottom: 1px solid gray;
-            width: 40vw;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: gray;
+            width: 100%;
+            flex: none;
+            margin: 20px 0;
+        }
+
+        .separator {
+            flex: 0 0 100%;
+        }
+
+        /* Titolo principale */
+        #elemento h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 35px;
+            /* ridotto da 50px */
             padding-top: 10px;
+            margin: 0;
         }
     </style>
 </head>
 
 <body>
-    <script>
-        function toggleContenuto() {
-            const contenuto = document.getElementById("contenitore");
-            const overlay = document.getElementById("overlay");
-
-            if (contenuto.style.display === "none") {
-                contenuto.style.display = "block";  // Mostra la sidebar
-                overlay.style.display = "block";    // Mostra la sovrapposizione scura
-            } else {
-                contenuto.style.display = "none";  // Nasconde la sidebar
-                overlay.style.display = "none";    // Nasconde la sovrapposizione
-            }
-        }
-    </script>
-
-    <div class="navbar">
-        <div class="bar">
-            <button class="menu" onclick="toggleContenuto()"><i class="fa-solid fa-bars"></i></button>
-        </div>
-        <i class="fa-brands fa-instagram"></i>
-    </div>
-
-    <div id="contenitore" class="sidebar">
-        <h1 style="padding: 10px; font-weight: bold; text-align: center;">IL CAFFE </h1>
-        <button class="x" onclick=" toggleContenuto()"><i class="fa-solid fa-xmark close-btn"></i></button>
-        <a class="utilities" href="{% url 'lista_articoli' %}"">
-            <p>Articoli</p>
-        </a>
-        <button class=" utilities">
-            <p>About</p>
-            </button>
-            <button class="utilities">
-                <p>Contact</p>
-            </button>
-            <button class="utilities">
-                <p>Newsletter</p>
-            </button>
-            <button class="utilities">
-                <p>Login</p>
-            </button>
-
-
-    </div>
-
-
-
-
+    <!-- Navbar -->
     <div class="navbar1">
         <div class="bar1"></div>
         <div
             style="display: flex; justify-content: space-between; align-items: center; padding: 10px; position: relative;">
-            <h1 style="font-weight: bold; text-align: center;"><img src="static/caffe.jpg">IL CAFFE</h1>
-            <div style="display: flex; margin: 0 0; font-size: 1.7vw; justify-content: center; align-items: center;">
-                <a class="utilities" href="{% url 'lista_articoli' %}" style="margin: 0 10px;">
-                    <p>Articoli</p>
-                </a>
-                <a class="utilities" href="{% url 'lista_articoli' %}" style="margin: 0 10px;">
-                    <p>Newsletter</p>
-                </a>
-                <a class="utilities" href="{% url 'lista_articoli' %}" style="margin: 0 10px;">
-                    <p>About</p>
-                </a>
-                <a class="utilities" href="{% url 'lista_articoli' %}" style="margin: 0 10px;">
-                    <p>Contatti</p>
-                </a>
-                <a class="utilities" href="{% url 'lista_articoli' %}" style="margin: 0 10px;">
-                    <p>Login</p>
-                </a>
+            <h1 style="font-weight: bold; text-align: center;">
+                <img src="static/caffe.jpg" alt="Logo">IL CAFFE
+            </h1>
+            <div style="display: flex; margin: 0; font-size: 1.7vw; justify-content: center; align-items: center;">
             </div>
             <i class="fa-brands fa-instagram"
-                style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 2.5vw; top: 50%; transform: translateY(-50%) translateX(-50%);"></i>
+                style="position: absolute; left: 50%; transform: translate(-50%, -50%); font-size: 2.5vw; top: 50%;"></i>
         </div>
     </div>
 
-
-    <div id=" overlay" class="overlay">
-    </div> <!-- Sovrapposizione scura -->
-
     <div id="elemento">
-        <h1 style="text-align: center; font-weight: bold; font-size: 50px;">IL CAFFE</h1>
+        <h1>IL CAFFE</h1>
         <small>
             {% load custom_filters %}
             <p style="text-align: center; color: gray;">{{ ""|giorno }}</p>
         </small>
 
-        <p>
-        <div class="rubrica">
-            <p style="color: blue;">Tecnologia </p>
-            <p>•</p>
-            <p style="color: red;">Marketing</p>
-        </div>
-        </p>
-
-
-
+        <!-- Primo articolo in evidenza -->
         <div class="container">
             {% for articolo in articoli %}
             {% if forloop.counter == 1 %}
@@ -355,42 +228,45 @@
             <div class="card">
                 {% else %}
                 <div class="card">
-
                     {% endif %}
-                    <img src='{{ articolo.immagine.url }}'
-                        style=" object-fit: cover; padding: 0px; border-radius: 7px; width: 100%; height: 90%;">
-                        <h1
-                            style="color: rgb(68, 54, 54); text-align: center; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
-                            {{ articolo.titolo |safe }}</h1>
-                        <p class="info">{{ articolo.descrizione_breve |safe}}</p>
-                        <div  class="uf">
-                            <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }} </i>
+                    <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                        <img src="{{ articolo.immagine.url }}" alt="{{ articolo.titolo }}">
+                        <h1>{{ articolo.titolo|safe }}</h1>
+                        <p class="info">{{ articolo.descrizione_breve|safe }}</p>
+                        <div class="uf">
+                            <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }}</i>
                             <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
                         </div>
-
-                        <a href="{% url 'dettaglio_articolo' articolo.id %}" style="color: white; font-size: 2.5vw; align-items: center; background-color: rgb(144, 67, 222); border-radius: 5px; height: 10vh; text-decoration: none; text-align: center;"> Leggi di più <i class="fa-solid fa-arrow-right"></i></a>
-
+                    </a>
                 </div>
                 {% endif %}
                 {% endfor %}
 
-                <div class="container">
-                    {% for articolo in articoli %}
-                    {% if forloop.counter > 1 and forloop.counter <= 4 %} <div class="box">
-                        <a href="{% url 'dettaglio_articolo' articolo.id %}">
-                            <h1>{{ articolo.titolo }}</h1>
-                            <p class="info">{{ articolo.descrizione_breve |safe}}</p>
-                            <small>
-                                <i class="fas fa-user"></i> {{ articolo.autore }} &nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fas fa-calendar-alt">&nbsp;</i>{{ articolo.data_pubblicazione|date:"d/m/Y" }}
-                            </small>
-                        </a>
+                <!-- Separator -->
+                <div class="separator">
+                    <hr>
+                    <div class="barb">
+                        <b class="utilities">ALTRI ARTICOLI</b>
+                        <a href="{% url 'lista_articoli' %}">Vedi tutti</a>
+                    </div>
                 </div>
-                {% endif %}
-                {% endfor %}
+
+                <!-- Altri articoli in griglia -->
+                {% for articolo in articoli %}
+                {% if forloop.counter > 1 and forloop.counter <= 4 %} <div class="box">
+                    <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                        <img src="{{ articolo.immagine.url }}" alt="{{ articolo.titolo }}">
+                        <h1>{{ articolo.titolo|safe }}</h1>
+                        <div class="uf">
+                            <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }}</i>
+                            <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
+                        </div>
+                    </a>
             </div>
+            {% endif %}
+            {% endfor %}
         </div>
-
+    </div>
 </body>
 
 </html>
