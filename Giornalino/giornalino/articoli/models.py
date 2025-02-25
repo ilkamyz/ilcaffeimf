@@ -30,30 +30,31 @@ class Articolo(models.Model):
 
         super().save(*args, **kwargs)
         if is_new:
-            send_mail(
-                subject=f"Nuovo articolo disponibile!!!",
-                message=f"""
-Ciao,
+            for iscritto in iscritti:
+                send_mail(
+                    subject=f"Nuovo articolo disponibile!!!",
+                    message=f"""
+    Ciao,
 
-Abbiamo appena aggiunto un nuovo articolo</a> al nostro sito! Puoi visualizzarlo cliccando sul seguente link:
+    Abbiamo appena aggiunto un nuovo articolo</a> al nostro sito! Puoi visualizzarlo cliccando sul seguente link:
 
-https://ilcaffe.pythonanywhere.com/{self.id}/
+    https://ilcaffe.pythonanywhere.com/{self.id}/
 
-Grazie per seguirci!
-""",
-                from_email="ilcaffemajoranafascitelli@gmail.com",
-                recipient_list=[iscritto.email for iscritto in iscritti],
-                fail_silently=False,
-                html_message=f"""
-Ciao,
+    Grazie per seguirci!
+    """,
+                    from_email="ilcaffemajoranafascitelli@gmail.com",
+                    recipient_list=[iscritto.email],
+                    fail_silently=False,
+                    html_message=f"""
+    Ciao,
 
-Abbiamo appena aggiunto un nuovo <a href="https://ilcaffe.pythonanywhere.com/{self.id}/">articolo</a> al nostro sito! 
+    Abbiamo appena aggiunto un nuovo <a href="https://ilcaffe.pythonanywhere.com/{self.id}/">articolo</a> al nostro sito! 
 
 
 
-Grazie per seguirci!
-""",
-            )
+    Grazie per seguirci!
+    """,
+                )
     
     # aggiungo queste due righe che servono a visualizzare sul database il titolo dell'articolo
     def __str__(self):
