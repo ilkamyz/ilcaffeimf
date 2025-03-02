@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articoli</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        /* Navbar superiore */
+        .navbar1 {
+            border-bottom: 1px solid gray;
+            box-shadow: 0 2px gray;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            position: relative;
+            z-index: 1;
+            max-height: 13vh;
+            padding: 10px;
+        }
+
+        .navbar1 img {
+            max-height: 10vh;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .bar1 {
+            position: absolute;
+            left: 0;
+            padding-bottom: 20px;
+        }
+
+        .navbar1 a {
+            color: black !important;
+            text-decoration: none;
+        }
+
+        .navbar1 a:hover {
+            color: darkblue !important;
+        }
+
+        /* Allineamento centrale di immagine e link nella navbar */
+        .navbar1 h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar1 h1 img {
+            margin-right: 10px;
+        }
+
+        /* Layout responsivo con CSS Grid */
+        .container {
+            display: grid;
+            /* Ogni box avrà un minimo di 300px e, se lo spazio lo permette, si espanderà fino a occupare una frazione uguale */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Stile per le box degli articoli */
+        .box {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            text-decoration: none;
+            padding: 15px;
+            font-size: 1em;
+        }
+
+        .box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 5px grey;
+        }
+
+        .box h1 {
+            margin: 10px 0;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .info,
+        small {
+            color: grey;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar1">
+        <div class="bar1"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <h1 style="font-weight: bold;">
+                <img src="{% static 'caffe.jpg' %}" alt="Logo">
+                <a href="https://ilcaffe.pythonanywhere.com/">IL CAFFÈ</a>
+            </h1>
+            <div style="display: flex; justify-content: center; align-items: center; font-size: 1.7vw;">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <select name="ordinamento" onchange="this.form.submit()"
+                            style="border-radius: 6px; padding: 5px; background-color: transparent; font-family: 'Times New Roman', Times, serif;">
+                            {% if request.POST.ordinamento == 'recenti' or not request.POST.ordinamento %}
+                            <option value="recenti" selected>Più recenti</option>
+                            <option value="meno_recenti">Meno recenti</option>
+                            {% else %}
+                            <option value="recenti">Più recenti</option>
+                            <option value="meno_recenti" selected>Meno recenti</option>
+                            {% endif %}
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for articolo in articoli %}
+        <div class="box">
+            <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                <img src="{{ articolo.immagine.url }}" alt="{{ articolo.titolo }}"
+                    style="object-fit: cover; border-radius: 7px; width: 100%; height: auto; max-height: 400px;">
+                <h1 style="color: rgb(68, 54, 54); font-family: 'Times New Roman', Times, serif;">{{
+                    articolo.titolo|safe }}</h1>
+                <p class="info">{{ articolo.descrizione_breve|safe }}</p>
+                <div class="uf">
+                    <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }}</i>
+                    <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+    <a href="{% url 'home' %}" class="container" style="padding-top: 0px;">Home</a>
+</body>
+
+</html>

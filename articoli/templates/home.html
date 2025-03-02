@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IL CAFFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar */
+        .navbar1 {
+            border-bottom: 1px gray solid;
+            box-shadow: 0 2px gray;
+            text-align: center;
+            justify-content: center;
+            font-size: 20px;
+            /* ridotto da 25px */
+            position: relative;
+            z-index: 1;
+            max-height: 13vh;
+            padding: 10px;
+        }
+
+        .navbar1 img {
+            max-height: 8vh;
+            /* ridotto da 10vh */
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .bar1 {
+            position: absolute;
+            left: 0;
+            padding: 10px;
+        }
+
+        /* Card (primo articolo) */
+        .card {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            margin-bottom: 20px;
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h1 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            /* ridotto */
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .card img {
+            object-fit: cover;
+            padding: 0;
+            border-radius: 7px;
+            width: 100%;
+            height: 90%;
+            max-height: 250px;
+            /* ridotto da 400px */
+        }
+
+        .info,
+        small {
+            color: grey;
+            margin: 10px auto;
+            font-size: 0.9em;
+        }
+
+        .uf {
+            color: grey;
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+            /* meno spazio */
+            font-size: 0.7rem;
+            /* ridotto */
+        }
+
+        /* Container per la griglia degli articoli */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            justify-content: center;
+        }
+
+        /* Box (altri articoli) */
+        .box {
+            flex: 1 1 calc(33.33% - 10px);
+            max-width: calc(33.33% - 10px);
+            min-width: calc(33.33% - 10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            text-decoration: none;
+            height: 100%;
+            background-color: white;
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+
+        .box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 5px grey;
+        }
+
+        .box h1 {
+            margin: 10px 0;
+            font-size: 1em;
+            /* ridotto */
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .box img {
+            object-fit: cover;
+            padding: 0;
+            border-radius: 7px;
+            width: 100%;
+            height: 90%;
+            max-height: 250px;
+            /* ridotto */
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .box {
+                flex: 1 1 calc(50% - 10px);
+                max-width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
+        .barb {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: gray;
+            width: 100%;
+            flex: none;
+            margin: 20px 0;
+        }
+
+        .separator {
+            flex: 0 0 100%;
+        }
+
+        /* Titolo principale */
+        #elemento h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 35px;
+            /* ridotto da 50px */
+            padding-top: 10px;
+            margin: 0;
+        }
+
+        .account-container {
+            position: relative;
+        }
+
+        /* Stile dell'icona dell'account */
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Stile della tendina (inizia nascosta) */
+        details .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 150px;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        /* Opzioni della tendina */
+        .dropdown a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 16px;
+            display: block;
+            text-align: center;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Mostra la tendina quando il menu è aperto */
+        details[open] .dropdown {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar1">
+        <div class="bar1"></div>
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; padding: 10px; position: relative;">
+            <h1 style="font-weight: bold; text-align: center;">
+                <img src="static/caffe.jpg" alt="Logo">IL CAFFE
+            </h1>
+            <div style="display: flex; margin: 0; font-size: 1.7vw; justify-content: center; align-items: center;">
+            </div>
+            <i class="fa-brands fa-instagram"
+                style="position: absolute; left: 50%; transform: translate(-50%, -50%); font-size: 2.5vw; top: 50%;"></i>
+            <span>
+                {% if autenticato %}
+                <span class="account-container">
+
+                    <a href="/newsletter/" style="font-weight: bold; text-align: center; padding: 5px;">newsletter</a>
+
+                    <details>
+                        <summary class="account-icon">A</summary>
+
+                        <div class="dropdown">
+                            <a href="/logout/">Logout</a>
+                        </div>
+                    </details>
+
+
+                </span>
+            </span>
+            {% else %}
+            <span>
+                <a href="/login/" style="font-weight: bold; text-align: center; padding: 5px;">login</a>
+                <a style="font-weight: bold; text-align: center; padding: 5px;">•</a>
+                <a href="/registrati/" style="font-weight: bold; text-align: center; padding: 5px;">registrati</a>
+                <a style="font-weight: bold; text-align: center; padding: 5px;">•</a>
+                <a href="/newsletter/" style="font-weight: bold; text-align: center; padding: 5px;">newsletter</a>
+            </span>
+            {% endif %}
+    </div>
+
+    <div id="elemento">
+        <h1>IL CAFFE</h1>
+        <small>
+            {% load custom_filters %}
+            <p style="text-align: center; color: gray;">{{ ""|giorno }}</p>
+        </small>
+
+        <!-- Primo articolo in evidenza -->
+        <div class="container">
+            {% for articolo in articoli %}
+            {% if forloop.counter == 1 %}
+            {% if articolo.immagine %}
+            <div class="card">
+                {% else %}
+                <div class="card">
+                    {% endif %}
+                    <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                        <img src="{{ articolo.immagine.url }}" alt="{{ articolo.titolo }}">
+                        <h1>{{ articolo.titolo|safe }}</h1>
+                        <p class="info">{{ articolo.descrizione_breve|safe }}</p>
+                        <div class="uf">
+                            <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }}</i>
+                            <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+                <!-- Separator -->
+                <div class="separator">
+                    <hr>
+                    <div class="barb">
+                        <b class="utilities">ALTRI ARTICOLI</b>
+                        <a href="{% url 'lista_articoli' %}">Vedi tutti</a>
+                    </div>
+                </div>
+
+                <!-- Altri articoli in griglia -->
+                {% for articolo in articoli %}
+                {% if forloop.counter > 1 and forloop.counter <= 4 %} <div class="box">
+                    <a href="{% url 'dettaglio_articolo' articolo.id %}">
+                        <img src="{{ articolo.immagine.url }}" alt="{{ articolo.titolo }}">
+                        <h1>{{ articolo.titolo|safe }}</h1>
+                        <div class="uf">
+                            <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }}</i>
+                            <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
+                        </div>
+                    </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
