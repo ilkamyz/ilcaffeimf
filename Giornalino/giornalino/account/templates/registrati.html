@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .registrati {
+            display: inline-block;
+            border: 1px solid gray;
+            padding: 10px;
+            border-radius: 8px;
+            transform: scale(2);
+            text-align: center;
+            background-color: rgb(230, 238, 245);
+        }
+
+        input {
+            background-color: transparent;
+            border-radius: 5px;
+            padding: 3px;
+            outline: transparent;
+            border: none;
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="registrati">
+
+        <h2>Crea il tuo account!</h2>
+        <form method="POST" action="{% url 'registrati' %}">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="email"><br><br>
+            <input type="password" name="password" placeholder="password"><br><br>
+            <button type="submit"
+                style="width: 20vw; border-radius: 5px; background-color:rgb(96, 96, 233); color: white;"><b>REGISTRATI</b></button>
+        </form>
+        <div style="font-size: 1.5vw;">Hai già il tuo account? <a href="/login/">Accedi ora!</a></div>
+        <a href="{% url 'home' %}" style="text-decoration: none;">«- HOME -»</a>
+    </div>
+
+
+</body>
+
+</html>

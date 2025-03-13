@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import Articolo, MiPiace
+from .models import Articolo
+from account.models import Account
+import account.views
 
 
 def lista_articoli(request):
@@ -33,24 +35,6 @@ def dettaglio_articolo(request, pk):
     )
 
 
-def toggle_mi_piace(request, pk):
-    if request.method == "POST":
-        articolo = get_object_or_404(Articolo, pk=pk)
-        mi_piace, creato = MiPiace.objects.get_or_create(
-            utente=request.user, articolo=articolo
-        )
-
-        if not creato:
-            mi_piace.delete()
-            stato = "rimosso"
-        else:
-            stato = "aggiunto"
-
-        return JsonResponse({"stato": stato, "totale": articolo.totale_mi_piace()})
-
-    return JsonResponse({"errore": "Metodo non supportato"}, status=405)
-
-
 def autore_dettaglio(request, author_name):
     articoli = Articolo.objects.filter(autore=author_name)
     return render(
@@ -61,6 +45,47 @@ def autore_dettaglio(request, author_name):
 
 
 def home(request):
-    articoli = Articolo.objects.all()
-    request.session["previous_page"] = request.path
-    return render(request, "home.html", {"articoli": articoli})
+    if "email" in request.session:
+        articoli = Articolo.objects.all()
+        a = True
+        request.session["previous_page"] = request.path
+        return render(request, "home.html", {"articoli": articoli, "autenticato": a})
+
+    else:
+        articoli = Articolo.objects.all()
+        request.session["previous_page"] = request.path
+        return render(request, "home.html", {"articoli": articoli})
+
+
+def like(request, pk):
+    if "email" in request.session:
+        account = get_object_or_404(Account, email=request.session["email"])
+        if str(pk) in account.like[0].keys():
+            if (
+                account.like[0][str(pk)] == True
+            ):  # se esiste pk nella mia sessione posso mettere like, (CORREGGERE!) idea: ad ogni articolo che si crea aggiungo ad una ista o dizionao i vari valori booleani
+
+                articolo = get_object_or_404(Articolo, pk=pk)
+                articolo.like = articolo.like + 1
+                articolo.save()
+                account.like[0][str(pk)] = False
+                account.save()
+                print(account.like)
+                return redirect(f"/{pk}/")
+            else:
+                articolo = get_object_or_404(Articolo, pk=pk)
+                account.like[0][str(pk)] = True
+                account.save()
+                articolo.like = articolo.like - 1
+                articolo.save()
+                return redirect(f"/{pk}/")
+
+        else:
+            account.like[0][f"{pk}"] = False
+            account.save()
+            articolo = get_object_or_404(Articolo, pk=pk)
+            articolo.like = articolo.like + 1
+            articolo.save()
+            return redirect(f"/{pk}/")
+    else:
+        return redirect(f"/{pk}/")

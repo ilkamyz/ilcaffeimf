@@ -84,6 +84,7 @@
 
             }
         }
+
     </style>
 
 </head>
@@ -94,7 +95,7 @@
     </div>
 
     <div class="card">
-        <h1>{{ articolo.titolo |safe}}</h1>
+        <h1>{{ articolo.titolo |safe }}</h1>
         <div style="margin-top: 20px; margin-bottom: 20px;">
             <p class="autore">{{ articolo.autore }}</p>
             {% load custom_filters %}
@@ -105,55 +106,22 @@
             {{ articolo.contenuto |safe}}
         </div>
 
-        <!-- Sezione per il pulsante Mi Piace -->
+
         <div>
             <p>
-                <button id="btn-mi-piace" data-articolo-id="{{ articolo.id }}">
-                    <i class="far fa-heart"></i> {{ articolo.totale_mi_piace }}
+            <form action="{% url 'like' articolo.pk %}"> <button id="btn-mi-piace" data-articolo-id="{{ articolo.id }}"
+                    type="submit">
+                    <i class="far fa-heart"></i> {{ articolo.like }}
                     Mi piace
-                </button>
+                </button></form>
             </p>
         </div>
 
-        <!-- Link per tornare alla lista degli articoli -->
+
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnMiPiace = document.getElementById('btn-mi-piace');
 
-            if (!btnMiPiace) {
-                console.error('Pulsante non trovato!');
-                return;
-            }
 
-            btnMiPiace.addEventListener('click', function () {
-                const articoloId = this.dataset.articoloId;
-
-                fetch(`/mi-piace/${articoloId}/`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}',
-                        'Content-Type': 'application/json',
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.stato) {
-                            this.innerHTML = `<i class="far fa-heart"></i> ${data.totale} Mi piace`;
-
-                            if (data.like_attivo) {
-                                this.classList.add('mi-piace-attivo');
-                            } else {
-                                this.classList.remove('mi-piace-attivo');
-                            }
-                        }
-                    })
-                    .catch(error => console.error('Errore:', error));
-            });
-        });
-
-    </script>
 </body>
 
 </html>

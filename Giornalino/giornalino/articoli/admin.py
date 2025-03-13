@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Articolo, MiPiace
+from .models import Articolo
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 
@@ -26,7 +26,7 @@ class ArticoloAdmin(admin.ModelAdmin):
     list_filter = ("data_pubblicazione", "autore")
     ordering = ("-data_pubblicazione",)
     # lista di attributi dell'articolo
-    list_display = ("titolo", "totale_mi_piace", "autore", "data_pubblicazione", "id")
+    list_display = ("titolo", "autore", "data_pubblicazione", "id")
     readonly_fields = ("data_pubblicazione",)
 
     class Media:
