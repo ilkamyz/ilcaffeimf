@@ -107,6 +107,13 @@
             overflow-x: scroll;
         }
 
+        .box::-webkit-scrollbar {
+            display: none; /* Nasconde la scrollbar su Chrome e Edge */
+        }
+        .card::-webkit-scrollbar {
+    display: none; /* Nasconde la scrollbar su Chrome e Edge */
+}
+
         .box:hover {
             transform: translateY(-2px);
             box-shadow: 0px 5px 5px grey;
@@ -320,6 +327,35 @@
                 align-items: center;
             }
         }
+
+        .nav-link {
+        padding: 8px;
+        font-size: 1em;
+        font-weight: bold;
+        text-decoration: none;
+        color: #4a90e2; /* Colore blu */
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-link:hover {
+        background-color: #f0f8ff;
+        color: #357ab7; /* Blu scuro al passaggio del mouse */
+    }
+
+    /* Separatori tra i link */
+    .nav-separator {
+        padding: 0 8px;
+        color: #4a90e2;
+        font-size: 1.5em;
+    }
+
+    /* Stile per il contenitore in linea */
+    .nav-link,
+    .nav-separator {
+        display: inline-block;
+        vertical-align: middle;
+    }
     </style>
 </head>
 
@@ -341,11 +377,12 @@
                 </div>
             </details>
             {% else %}
-            <a href="/login/" style="padding: 5px;">Login</a>
-            <a style="padding: 5px;">•</a>
-            <a href="/registrati/" style="padding: 5px;">Registrati</a>
-            <a style="padding: 5px;">•</a>
-            <a href="/newsletter/" style="padding: 5px;">Newsletter</a>
+            <a href="/login/" class="nav-link">Login</a>
+            <a class="nav-separator">•</a>
+            <a href="/registrati/" class="nav-link">Registrati</a>
+            <a class="nav-separator">•</a>
+            <a href="/newsletter/" class="nav-link">Newsletter</a>
+
             {% endif %}
         </div>
     </div>

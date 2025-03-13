@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <style>
         body {
             display: flex;
@@ -9,25 +12,74 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
         }
 
         .login {
-            display: inline-block;
-
-            padding: 10px;
+            padding: 30px;
             border-radius: 8px;
-            transform: scale(2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
-            background-color: rgb(230, 238, 245);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 2em;
+            font-weight: bold;
         }
 
         input {
-            background-color: transparent;
-            padding: 3px;
-            outline: transparent;
-            border: none;
-            border-bottom: 1px solid gray;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1.1em;
+            outline: none;
+            background-color: #f9f9f9;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
 
+        input:focus {
+            border-color: #6076e3;
+            box-shadow: 0 0 8px rgba(91, 155, 213, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: #6076e3;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5063c3;
+        }
+
+        .additional-links {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .additional-links a {
+            color: #6076e3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .additional-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -37,16 +89,18 @@
         <h1>LOGIN</h1>
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            <input type="email" name="email" placeholder="email"><br><br>
-            <input type="password" name="password" placeholder="password"><br><br>
-            <button type="submit"
-                style="width: 20vw; border-radius: 5px; background-color:rgb(96, 96, 233); color: white;"><b>LOGIN</b></button>
+            <input type="email" name="email" placeholder="Email">
+
+            <input type="password" name="password" placeholder="Password">
+
+            <button type="submit"><b>LOGIN</b></button>
         </form>
-        <div style="font-size: 1.5vw;">Non sei registrato? <a href="/registrati/">Registrati ora!</a></div>
-        <a href="{% url 'home' %}" style="text-decoration: none;">«- HOME -»</a>
+
+        <div class="additional-links">
+            <p>Non sei registrato? <a href="/registrati/">Registrati ora!</a></p>
+            <a href="{% url 'home' %}">«- HOME -»</a>
+        </div>
     </div>
-
-
 </body>
 
 </html>

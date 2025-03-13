@@ -80,19 +80,32 @@
             text-decoration: none;
             padding: 15px;
             font-size: 1em;
+            min-height: 100%;
+            max-height: 100%;
+            overflow-y: scroll;
+            overflow-x: scroll;
         }
+        .box::-webkit-scrollbar {
+            display: none;
+        }
+
+
 
         .box:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 5px grey;
         }
 
+
         .box h1 {
             margin: 10px 0;
             color: #333;
             font-weight: bold;
             font-size: 1.1em;
+            padding-bottom:10px;
         }
+
+
 
         .info,
         small {
@@ -137,7 +150,6 @@
                 <img src="{{ articolo.immagine.url }}" alt="{{ articolo.titolo }}"
                     style="object-fit: cover; border-radius: 7px; width: 100%; height: auto; max-height: 400px;">
                 <h1 style="color: rgb(68, 54, 54); font-family: 'Times New Roman', Times, serif;">{{ articolo.titolo|safe }}</h1>
-                <p class="info">{{ articolo.descrizione_breve|safe }}</p>
                 <div class="uf">
                     <i class="fas fa-user">&nbsp;&nbsp;&nbsp;{{ articolo.autore }}</i>
                     <i class="fas fa-calendar-alt">&nbsp;&nbsp;&nbsp;{{ articolo.data_pubblicazione|date:"d/m/Y" }}</i>
