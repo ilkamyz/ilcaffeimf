@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Merch ISIS Majorana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .contenitore {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .griglia {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        .prodotto {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .prodotto:hover {
+            transform: scale(1.03);
+        }
+
+        .prodotto img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .prodotto h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .prodotto p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .prodotto .whatsapp {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .prodotto .whatsapp:hover {
+            background: #218838;
+        }
+
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .home {
+            display: block;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 20px auto;
+            width: fit-content;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .home:hover {
+            background-color: rgb(44, 42, 42);
+            transform: scale(1.05);
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Merch ISIS Majorana Fascitelli</h1>
+        <p>Scopri la nostra collezione</p>
+    </header>
+    {% if numero > 0 %}
+        <div class="contenitore">
+            <div class="griglia">
+                {% for prodotto in merch %}
+                <a class="link" href="{% url 'merch_id' prodotto.id %}">
+                    <div class="prodotto">
+                        <img src="{{ prodotto.image1.url }}" alt="{{ prodotto.nome }}"
+                            style="object-fit: cover; border-radius: 7px; width: 100%; height: auto; max-height: 400px;">
+                        <h1 style="color: rgb(68, 54, 54); font-family: 'Times New Roman', Times, serif;">{{ prodotto.nome|safe }}</h1>
+                        <p class="info">{{ prodotto.descrizione|safe }}</p>
+                        <a class="whatsapp" href="numero"><i class="fa-brands fa-whatsapp">&nbsp;</i>CONTATTACI</a>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <h1 style="text-align: center; padding-top: 17px;">NESSUN PRODOTTO È PRONTO PER ESSERE ACQUISTATO</h1>
+    {% endif %}
+
+
+    <a href="/" class="home">Vai alla Home</a>
+
+</body>
+
+</html>

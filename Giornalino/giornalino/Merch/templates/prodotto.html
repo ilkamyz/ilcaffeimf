@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prodotto IMF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+
+        .slider input {
+            display: none;
+        }
+
+
+        #slide1:checked~.slides {
+            transform: translateX(0%);
+        }
+
+        #slide2:checked~.slides {
+            transform: translateX(-100%);
+        }
+
+        #slide3:checked~.slides {
+            transform: translateX(-200%);
+        }
+
+
+        .nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 0;
+            transform: translateY(-50%);
+        }
+
+        .nav div {
+            display: none;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+
+        #slide1:checked~.nav .slide1-nav {
+            display: block;
+        }
+
+        #slide2:checked~.nav .slide2-nav {
+            display: block;
+        }
+
+        #slide3:checked~.nav .slide3-nav {
+            display: block;
+        }
+
+        .nav label {
+            color: white;
+            background-color: rgba(19, 16, 16, 0.83);
+            padding: 0px;
+            padding: 11px;
+            font-size: 23px;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nav .prev {
+            left: 10px;
+        }
+
+        .nav .next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ prodotto.nome|safe }}</h1>
+
+        <div class="slider">
+            <input type="radio" name="slider" id="slide1" checked>
+            <input type="radio" name="slider" id="slide2">
+            <input type="radio" name="slider" id="slide3">
+
+
+            <div class="slides">
+                <div class="slide">
+                    <img src="{{ prodotto.image1.url }}" alt="Felpa ISIS Majorana 1">
+                </div>
+                <div class="slide">
+                    <img src="{{ prodotto.image2.url }}" alt="Felpa ISIS Majorana 2">
+                </div>
+                <div class="slide">
+                    <img src="{{ prodotto.image3.url }}" alt="Felpa ISIS Majorana 3">
+                </div>
+            </div>
+
+
+            <div class="nav">
+                <div class="slide1-nav">
+                    <label class="prev" for="slide3">&#10094;</label>
+                    <label class="next" for="slide2">&#10095;</label>
+                </div>
+                <div class="slide2-nav">
+                    <label class="prev" for="slide1">&#10094;</label>
+                    <label class="next" for="slide3">&#10095;</label>
+                </div>
+                <div class="slide3-nav">
+                    <label class="prev" for="slide2">&#10094;</label>
+                    <label class="next" for="slide1">&#10095;</label>
+                </div>
+            </div>
+        </div>
+
+
+        <p>{{ prodotto.descrizione }}</p>
+
+
+        <button
+            style="text-align: center; border-color: rgb(38, 204, 38); background-color: rgb(20, 211, 20); border-radius:5px; padding: 10px 20px; font-size: 16px; cursor: pointer; color: white; font-weight: bold;"><i
+                class="fa-brands fa-whatsapp"></i>&nbsp;Contattaci</button>
+    </div>
+</body>
+
+
+</html>

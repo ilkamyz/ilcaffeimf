@@ -8,11 +8,14 @@
     <title>IL CAFFE</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+
     <style>
         body {
-            background-color: aliceblue;
+            background-color: white;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
 
@@ -75,6 +78,7 @@
             /* meno spazio */
             font-size: 0.7rem;
             /* ridotto */
+            font-family: 'Inter', sans-serif;
         }
 
         /* Container per la griglia degli articoli */
@@ -126,7 +130,7 @@
             color: #333;
             font-weight: bold;
             text-align: center;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Times New Roman', Times;
         }
 
         .box img {
@@ -247,6 +251,7 @@
         }
 
         .navbar1 {
+
             text-align: center;
             justify-content: center;
             font-size: 20px;
@@ -277,6 +282,9 @@
         .navbar1 .menu {
             display: flex;
             align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: black;
+            text-decoration: none;
         }
 
         /* Navbar mobile */
@@ -331,9 +339,8 @@
         .nav-link {
         padding: 8px;
         font-size: 1em;
-        font-weight: bold;
         text-decoration: none;
-        color: #4a90e2; /* Colore blu */
+        font-weight: 400;
         border-radius: 5px;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
@@ -347,7 +354,7 @@
     .nav-separator {
         padding: 0 8px;
         color: #4a90e2;
-        font-size: 1.5em;
+        font-size: 1.1em;
     }
 
     /* Stile per il contenitore in linea */
@@ -355,6 +362,16 @@
     .nav-separator {
         display: inline-block;
         vertical-align: middle;
+        color: black;
+
+    }
+
+    .merch{
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .merch:hover {
+        color: #357ab7;
     }
     </style>
 </head>
@@ -368,20 +385,20 @@
         <i class="fa-brands fa-instagram instagram-icon"></i>
         <div class="menu">
             {% if autenticato %}
-            <a href="/newsletter/" style="padding: 5px;">Newsletter</a>
+            <a href="/newsletter/" style="padding: 5px;">NEWSLETTER</a>
             <a style="padding: 5px;">•</a>
             <details>
                 <summary class="account-icon"><img src="{% static 'usericon.jpeg' %}" alt="logo"></summary>
                 <div class="dropdown">
-                    <a href="/logout/">Logout</a>
+                    <a href="/logout/">LOGOUT</a>
                 </div>
             </details>
             {% else %}
-            <a href="/login/" class="nav-link">Login</a>
+            <a href="/login/" class="nav-link">LOGIN</a>
             <a class="nav-separator">•</a>
-            <a href="/registrati/" class="nav-link">Registrati</a>
+            <a href="/registrati/" class="nav-link">REGISTRATI</a>
             <a class="nav-separator">•</a>
-            <a href="/newsletter/" class="nav-link">Newsletter</a>
+            <a href="/newsletter/" class="nav-link">NEWSLETTER</a>
 
             {% endif %}
         </div>
@@ -464,6 +481,13 @@
             {% endfor %}
         </div>
     </div>
+
+     <span class='merch' style="display: flex; flex-direction: row; align-items: center;">
+        <a href="{% url 'merch' %}" style="display: flex; align-items: center; text-decoration: none; color: inherit; text-align: center;">
+            <img src="{% static 'imflogo1.png' %}" style="scale: 0.8; margin-right: 10px;">
+            <h1 style="margin: 0; font-size: 3em;">Scopri il merch dell'ISIS Majorana Fascitelli</h1>
+        </a>
+    </span>
 </body>
 
 </html>
