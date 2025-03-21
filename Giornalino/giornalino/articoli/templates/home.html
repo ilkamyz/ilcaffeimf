@@ -366,13 +366,20 @@
 
     }
 
-    .merch{
-        transition: background-color 0.3s ease, color 0.3s ease;
+    .merch a:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     }
 
-    .merch:hover {
-        color: #357ab7;
+    .merch a img:hover {
+        transform: scale(1.1);
     }
+
+    .merch a h1:hover {
+        color: #357ab7; /* Cambia colore al passaggio del mouse */
+    }
+
+
     </style>
 </head>
 
@@ -458,7 +465,7 @@
 
                 <!-- Separator -->
                 <div class="separator">
-                    <hr>
+                    <hr style="border: none; height: 3px; background: linear-gradient(to right, #fff, #357ab7, #fff); width: 80%; margin: 40px auto;">
                     <div class="barb">
                         <b class="utilities">ALTRI ARTICOLI</b>
                         <a href="{% url 'lista_articoli' %}">Vedi tutti</a>
@@ -482,12 +489,16 @@
         </div>
     </div>
 
-     <span class='merch' style="display: flex; flex-direction: row; align-items: center;">
-        <a href="{% url 'merch' %}" style="display: flex; align-items: center; text-decoration: none; color: inherit; text-align: center;">
-            <img src="{% static 'imflogo1.png' %}" style="scale: 0.8; margin-right: 10px;">
-            <h1 style="margin: 0; font-size: 3em;">Scopri il merch dell'ISIS Majorana Fascitelli</h1>
-        </a>
-    </span>
+    <div class="separatore">
+    <hr style="border: none; height: 3px; background: linear-gradient(to right, #357ab7, #fff, #357ab7); width: 80%; margin: 40px auto;">
+</div>
+
+     <span class="merch" style="display: flex; flex-direction: column; align-items: center; margin: 50px 0; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+    <a href="{% url 'merch' %}" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; text-align: center; border-radius: 15px; box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <img src="{% static 'imflogo1.png' %}" alt="Logo Merch" style="width: 80%; max-width: 350px; border-radius: 10px; transition: transform 0.3s ease;">
+        <h1 style="font-size: 2.5em; margin-top: 20px; color: #333; font-weight: bold; font-family: 'Arial', sans-serif; letter-spacing: 1px; transition: color 0.3s ease;">Scopri il merch dell'ISIS Majorana Fascitelli</h1>
+    </a>
+</span>
 </body>
 
 </html>

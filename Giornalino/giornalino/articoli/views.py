@@ -19,6 +19,21 @@ def lista_articoli(request):
     elif ordinamento == "meno_recenti":
         articoli = articoli.order_by("data_pubblicazione")
 
+    elif ordinamento == "autore":
+        autori=[]
+        articoli2=[]
+        for articolo in articoli:
+            if articolo.autore not in autori:
+                autori.append(articolo.autore)
+            else:
+                pass
+
+        for articolo in articoli:
+            a=autori.index(articolo.autore)
+            articoli2.insert(a, articolo)
+
+        articoli=articoli2
+
     request.session["previous_page"] = request.path
 
     return render(request, "lista_articoli.html", {"articoli": articoli})

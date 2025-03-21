@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-pfx-fqssn#iir0l2#6nq7v1uyrmren9(nhkbbc4l+dws)ld2yc"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "lucarrino.pythonanywhere.com",
@@ -168,7 +168,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "ilcaffemajoranafascitelli@gmail.com"
-EMAIL_HOST_PASSWORD = ""  # sostituire con la password dell'email
+EMAIL_HOST_PASSWORD = "ykqw njhm otgi cfyu"  # sostituire con la password dell'email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Salva le sessioni nel database
 SESSION_COOKIE_NAME = "sessionid"  # Nome del cookie per la sessione
